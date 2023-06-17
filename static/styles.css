@@ -1,0 +1,24 @@
+body.header {
+  background-color: #73C6B6;
+}
+
+h1.header {
+  font-family: monospace;
+  color: #1B4F72;
+  text-align: center;
+  padding-top: 5%;
+  font-weight: bold;
+  font-size: 100px;
+}
+
+h3.bars {
+  font-family: monospace;
+  color: #4A235A;
+  font-weight: bold;
+}
+
+h3.user {
+  font-family: monospace;
+  color: #6C3483;
+  font-weight: bold;
+}

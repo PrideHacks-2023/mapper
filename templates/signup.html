@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <div class="container">
+        <h2>Register</h2>
+
+        {% if message %}
+            <div>{{ message }}</div>
+        {% endif %}
+
+        <form action="{{ url_for('signup')}}" method="post">
+            <div class="form-group">
+                <input class="form-control col-md-3" autofocus type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input class="form-control col-md-3" type="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <input class="form-control col-md-3" type="password" name="confirm" placeholder="Retype Password">
+            </div>
+            <input class="btn btn-primary" type="submit" value="Register">
+        </form>
+
+        Already have an account? <a href="{{ url_for('login')}}">Log In here.</a>
+
+    </div>
+
+{% endblock %}
