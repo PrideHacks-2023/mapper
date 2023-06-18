@@ -1,4 +1,4 @@
-# wetryourbest's post page
+# Planet Support's post page
 
 ![main](static/screenshot.png)
 
