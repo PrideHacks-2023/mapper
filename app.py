@@ -11,6 +11,7 @@ import utils
 dotenv_path = '.env'
 load_dotenv(dotenv_path)
 SECRET_KEY = os.environ.get("SECRET_KEY")
+API_KEY = os.environ.get("API_KEY")
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
@@ -22,7 +23,7 @@ login_manager.init_app(app)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', API_KEY=API_KEY)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -61,7 +62,7 @@ def login():
 def message():
     msg_obj = {"username": flask_login.current_user.id,
                "text": request.form['message'],
-               "location": request.form['location'],
+               "location": [request.form['location']],
                "timestamp": datetime.now()}
     if utils.add_message(msg_obj):
         return render_template('index.html', message="Post sent successfully!")
@@ -102,6 +103,11 @@ def request_loader(request):
     user = User()
     user.id = username
     return user
+
+
+@app.route('/msg')
+def msg():
+    return utils.get_messages()
 
 
 if __name__ == ' __main__':

@@ -5,6 +5,9 @@ import bcrypt
 
 from dotenv import load_dotenv
 import os
+import random
+
+from geopy.geocoders import Nominatim
 
 dotenv_path = '.env'
 load_dotenv(dotenv_path)
@@ -50,9 +53,27 @@ def check_words(text):
     return results
 
 
+def get_location_details(location):
+    geolocator = Nominatim(user_agent="app")
+    location = geolocator.geocode(location)
+    return location.latitude, location.longitude
+
+
 def add_message(message_obj):
     results = check_words(message_obj['text'])
+    location = message_obj['location'][0]
+    message_obj['location'].append(get_location_details(location))
     if not results.output:
         message_id = messages.insert_one(message_obj).inserted_id
         return message_id
     return False
+
+
+def get_messages():
+    all_messages = messages.find({})
+    messages_arr = []
+    for m in all_messages:
+        messages_arr.append(m)
+
+    random.shuffle(messages_arr)
+    return messages_arr
