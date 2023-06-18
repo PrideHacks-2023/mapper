@@ -11,6 +11,22 @@ h1.header {
   font-size: 100px;
 }
 
+h2.header {
+  font-family: monospace;
+  color: #1B4F72;
+  text-align: center;
+  padding-top: 5%;
+  font-weight: bold;
+  font-size: 100px;
+}
+
+h2.index {
+  font-family: monospace;
+  color: #212F3D;
+  font-weight: bold;
+  text-align: center;
+}
+
 h3.bars {
   font-family: monospace;
   color: #4A235A;
@@ -21,4 +37,35 @@ h3.user {
   font-family: monospace;
   color: #6C3483;
   font-weight: bold;
+}
+
+h3.index {
+  font-family: monospace;
+  color: #212F3D;
+  font-weight: bold;
+  text-align: center;
+}
+
+p.index {
+  font-family: monospace;
+  color: #212F3D;
+  text-align: center;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+}
+
+.center1 {
+  margin: auto;
+  width: 25%;
+}
+
+input.index {
+  font-family: monospace;
+  color: #212F3D;
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
 }

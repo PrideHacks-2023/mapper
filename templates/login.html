@@ -3,23 +3,30 @@
 {% block body %}
 
     <div class="container">
-        <h2>Login</h2>
+        <h2 class="index">Login</h2>
 
         {% if message %}
-            <div>{{ message }}</div>
+            <div class="container alert alert-primary">
+                <h3 class="index">
+                    {{ message }}
+                </h3>
+            </div>
         {% endif %}
+        <div class="container center">
+            <form action="{{ url_for('login')}}" method="post">
+                <div class="form-group">
+                    <input class="form-control col-md-3" autofocus type="text" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <input class="form-control col-md-3" type="password" name="password" placeholder="Password">
+                </div>
+                <input class="btn btn-primary" type="submit" value="Login">
+            </form>
 
-        <form action="{{ url_for('login')}}" method="post">
-            <div class="form-group">
-                <input class="form-control col-md-3" autofocus type="text" name="username" placeholder="Username">
-            </div>
-            <div class="form-group">
-                <input class="form-control col-md-3" type="password" name="password" placeholder="Password">
-            </div>
-            <input class="btn btn-primary" type="submit" value="Login">
-        </form>
-
-        Don't have an account? <a href="{{ url_for('signup')}}">Sign up here.</a>
+            <p class="index">
+                Don't have an account? <a href="{{ url_for('signup')}}">Sign up here.</a>
+            </p>
+        </div>
 
     </div>
 

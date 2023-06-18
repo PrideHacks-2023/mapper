@@ -51,5 +51,8 @@ def check_words(text):
 
 
 def add_message(message_obj):
-    message_id = messages.insert_one(message_obj).inserted_id
-    return message_id
+    results = check_words(message_obj['text'])
+    if not results.output:
+        message_id = messages.insert_one(message_obj).inserted_id
+        return message_id
+    return False

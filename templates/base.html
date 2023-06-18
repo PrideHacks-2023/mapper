@@ -18,24 +18,32 @@
             <ul class="nav justify-content-center">
               {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" style="color:#708054" href="{{ url_for('message')}}">
-                        <h3 class="bars">Create post</h3>
+                    <a class="nav-link" style="color:#708054" href="{{ url_for('home')}}">
+                        <button type="button" class="btn" style="background-color:#F1948A">
+                            <h3 class="bars">Create post</h3>
+                        </button>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color:#708054" href="{{ url_for('logout')}}">
-                        <h3 class="bars">Log Out</h3>
+                        <button type="button" class="btn" style="background-color:#D7BDE2">
+                            <h3 class="bars">Log Out</h3>
+                        </button>
                     </a>
                 </li>
               {% else %}
                 <li class="nav-item">
                     <a class="nav-link" style="color:#708054" href="{{ url_for('login')}}">
-                        <h3 class="bars">Log In</h3>
+                        <button type="button" class="btn" style="background-color:#D6EAF8">
+                            <h3 class="bars">Log In</h3>
+                        </button>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color:#708054" href="{{ url_for('signup')}}">
-                        <h3 class="bars">Sign Up</h3>
+                        <button type="button" class="btn" style="background-color:#FCF3CF">
+                            <h3 class="bars">Sign Up</h3>
+                        </button>
                     </a>
                 </li>
               {% endif %}

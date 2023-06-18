@@ -21,12 +21,6 @@ login_manager.init_app(app)
 
 
 @app.route('/')
-def hello():
-    return '🤭'
-
-
-@app.route('/home')
-@flask_login.login_required
 def home():
     return render_template('index.html')
 
@@ -52,13 +46,14 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
     username = request.form['username']
-    if utils.login_user(username, request.form['password']):
-        user = User()
-        user.id = username
-        flask_login.login_user(user)
-        return redirect(url_for('home'))
-
-    return render_template('login.html', message="Invalid username and/or password.")
+    try:
+        if utils.login_user(username, request.form['password']):
+            user = User()
+            user.id = username
+            flask_login.login_user(user)
+            return redirect(url_for('home'))
+    except TypeError:
+        return render_template('login.html', message="Invalid username and/or password.")
 
 
 @app.route('/message', methods=['GET', 'POST'])
@@ -69,8 +64,8 @@ def message():
                "location": request.form['location'],
                "timestamp": datetime.now()}
     if utils.add_message(msg_obj):
-        return redirect(url_for('home'))
-    return 'Message not sent, no hate speech allowed'
+        return render_template('index.html', message="Post sent successfully!")
+    return render_template('index.html', message="Message not sent, no hate speech allowed", failed=True)
 
 
 @app.route('/logout')

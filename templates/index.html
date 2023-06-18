@@ -3,21 +3,53 @@
 {% block body %}
 
     <div class="container">
-        <h2>Create post</h2>
-
         {% if message %}
-            <div>{{ message }}</div>
+            {% if not failed %}
+            <div class="container alert alert-primary">
+                <h3 class="index">
+                    {{ message }}
+                </h3>
+            </div>
+            {% else %}
+            <div class="container alert alert-danger">
+                <h3 class="index">
+                    {{ message }}
+                </h3>
+            </div>
+            {% endif %}
         {% endif %}
 
-        <form action="{{ url_for('message')}}" method="post">
-            <div class="form-group">
-                <input class="form-control col-md-3" type="text" name="message" placeholder="message">
-            </div>
-            <div class="form-group">
-                <div class="autocomplete-container" id="autocomplete-container"></div>
-            </div>
-            <input class="btn btn-primary" type="submit" value="Post">
-        </form>
+        {% if current_user.is_authenticated %}
+        <div class="container center">
+            <h3 class="index">
+                Write an encouraging message!
+            </h3>
+            <form action="{{ url_for('message')}}" method="post">
+                <div class="form-group">
+                    <textarea class="form-control col-md-20" name="message" rows="10" cols="50">
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <div class="autocomplete-container" id="autocomplete-container"></div>
+                </div>
+                <h3 class="index">
+                    Location to send message!
+                </h3>
+                <div class="form-group">
+                    <input class="form-control col-md-20" type="text" name="location" placeholder="Location">
+                </div>
+                <div class="form-group center1">
+                    <button type="button" class="btn" style="background-color:#E59866">
+                        <input class="btn index" style="background-color:#E59866" type="submit" value="Send">
+                    </button>
+                </div>
+            </form>
+        {% else %}
+            <h3 class="index">
+                Login or sign up to start sending messages! 🤭
+            </h3>
+        </div>
+        {% endif %}
 
     </div>
 
