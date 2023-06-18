@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, url_for, render_template
 import flask_login
+from flask_cors import CORS
 import bcrypt
 
 from dotenv import load_dotenv
@@ -14,6 +15,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 API_KEY = os.environ.get("API_KEY")
 
 app = Flask(__name__)
+CORS(app)
 app.secret_key = SECRET_KEY
 
 login_manager = flask_login.LoginManager()
@@ -65,8 +67,8 @@ def message():
                "location": [request.form['location']],
                "timestamp": datetime.now()}
     if utils.add_message(msg_obj):
-        return render_template('index.html', message="Post sent successfully!")
-    return render_template('index.html', message="Message not sent, no hate speech allowed", failed=True)
+        return render_template('index.html', message="Post sent successfully!", API_KEY=API_KEY)
+    return render_template('index.html', message="Message not sent, no hate speech allowed", failed=True, API_KEY=API_KEY)
 
 
 @app.route('/logout')
@@ -111,5 +113,4 @@ def msg():
 
 
 if __name__ == ' __main__':
-    app.debug = True
-    app.run()
+    app.run(host='0.0.0.0')
