@@ -73,6 +73,7 @@ def get_messages():
     all_messages = messages.find({})
     messages_arr = []
     for m in all_messages:
+        m.pop('_id')
         messages_arr.append(m)
 
     random.shuffle(messages_arr)
